@@ -77,10 +77,10 @@ if (isset($_GET['supprimer_news'])) // Si l'on demande de supprimer une news.
     <h2>Liste des news</h2>
 </div>
 <div id="container">
-  
+<a href="/postnews">
 <button class="additems">
-    <i class="fas fa-plus"></i> <a href="/postnews">Ajouter une news</a>
-</button>
+    <i class="fas fa-plus"></i>Ajouter une news
+</button></a>
 <a class="btn btn-disc" href="/disconnect" style="float:right;">
     <i class="fas fa-sign-out-alt"></i> Déconnexion</a>
 <div class="table-responsive table--no-card m-b-40">

@@ -1,8 +1,9 @@
 <?php
 if ( isset($_GET['id']) )
     {
-        $res = $mysqli->query("SELECT * FROM articles WHERE id = ".$_GET['id']." ");
-        $row = mysqli_fetch_array($res);
+        $res = $db->prepare("SELECT * FROM articles WHERE id = ".$_GET['id']." ");
+        $res->execute();
+        $row = $res->fetch();
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,7 @@ if ( isset($_GET['id']) )
             <h4 class="font-italic">A propos</h4>
             <p class="mb-0">
                 <?php 
-                $req = $db->prepare('SELECT * FROM articles WHERE category_id = 999');
+                $req = $db->prepare('SELECT * FROM a_propos');
                 $req->execute();
                 $aPropos = $req->fetch();
                 echo $aPropos['content'];

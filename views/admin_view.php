@@ -42,9 +42,10 @@
 			<?php 
 			$username = $_SESSION['username'];
 
-			$db = mysqli_connect('localhost', 'root', 'root', 'webdev');
-			$checkrank = mysqli_query($db,"SELECT `rank` FROM `tbl_user` WHERE user_login = '".$username."'");
-			while($row = mysqli_fetch_array($checkrank)) {
+			$checkrank = $db->prepare("SELECT `rank` FROM `tbl_user` WHERE user_login = '".$username."'");
+			$checkrank->execute();
+			while($row = $checkrank->fetch()) {
+				// var_dump($row); --> Return "Admin" ! Good ;)
     			if(strtolower($row['rank']) == 'admin') { ?>
 					<p> <a href="/listenews" style="color: red;">Liste des news</a> </p>
 				<?php } ?>

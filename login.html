@@ -1,27 +1,21 @@
-<div class='box'>
-    <div class='box-form'>
-      <div class='box-login-tab'></div>
-      <div class='box-login-title'>
-          <div class='i i-login'></div>
-        <h2>ADMIN</h2>
-      </div>
-      <div class='box-login'>
-        <div class='fieldset-body' id='login_form'>
-            <form action="/admin" method="post">
-            <p class='field'>
-            <label for='user'>IDENTIFIANT</label>
-            <input type='text' id='login' name='login' title='Username' />
-            <span id='valida' class='i i-warning'></span>
-          </p>
-            <p class='field'>
-            <label for='pass'>MOT DE PASSE</label>
-            <input type='password' id='pass' name='pass' title='Pass' />
-            <span id='valida' class='i i-close'></span>
-          </p>
-            <input type='submit' id='do_login' value='CONNEXION' title='Connexion' />
-            </form>
-        </div>
-      </div>
-    </div>
+<link rel="stylesheet" href="assets/styles/css/admin.css">
+
+<div class="header">
+  <h2>Administration</h2>
+  <a href="/home" class="btn" name="return_home">Retour à l'accueil</a>
+</div>
+<form method="post" action="controllers/server_controller.php" class="small">
+  <div class="input-group">
+    <label>Identifiant</label>
+    <input type="text" name="username">
   </div>
-  
+  <div class="input-group">
+    <label>Mot de passe</label>
+    <input type="password" name="password">
+  </div>
+  <div class="input-group">
+    <button type="submit" class="btn" name="login_user">Connexion</button>
+
+  </div>
+</form>
+</div>

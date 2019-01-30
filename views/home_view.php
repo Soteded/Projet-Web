@@ -110,9 +110,12 @@
             <p><?php
             // var_dump(strlen($donnees[$numdonnee]['content']));
             if (strlen($donnees[$numdonnee]['content']) < 100) {
-              echo $substrArt;
+              $parser->parse($substrArt);
+              print $parser->getAsHtml();
             }else {
-              echo $substrArt, '.....';
+              $parser->parse($substrArt);
+              print $parser->getAsHtml();
+              echo '.....';
             }
             ?></p>
           </div><!-- /.blog-post -->

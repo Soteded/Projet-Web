@@ -16,6 +16,15 @@ if ( isset($_GET['id']) )
 <html>
 <body>
 <head>
+
+<script>
+$(document).ready(function() {
+var wbbOpt = {
+buttons: "bold,italic,underline,|,img,link,|,code,quote"
+}
+$("#editor").wysibb(wbbOpt);
+});
+</script>
     <?php require 'views/includes/head.php'?>
     <link rel="stylesheet" href="assets/styles/css/admin.css">
     <title>Modifier une News - Mon site</title>
@@ -35,9 +44,9 @@ if ( isset($_GET['id']) )
     <fieldset>
         <legend>Catégorie : </legend>
         <select name="category">
-<?php foreach ($allCategories as $index => $categorie): ?>
+    <?php foreach ($allCategories as $index => $categorie): ?>
           <option value="<?=$categorie['id'] ?> " > <?=$categorie['name']?> </option>
-<?php endforeach ?>
+    <?php endforeach ?>
 </select>
     </fieldset>
     <fieldset>
@@ -47,7 +56,8 @@ if ( isset($_GET['id']) )
 
     <fieldset>
         <legend>Contenu : </legend>
-        <textarea rows="10" cols="100" name="content"><?= rtrim($row['content']); ?></textarea><br />
+        <!-- <textarea rows="10" cols="100" name="content"><?= rtrim($row['content']); ?></textarea><br /> -->
+        <textarea id="editor" name="content" rows="10" cols="100"><?= rtrim($row['content']); ?></textarea><br />
         <input type="hidden" name="id_modif" value="<?= $row['id'] ?>" />
     </fieldset>
     <input type="submit" value="Envoyer" />

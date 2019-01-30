@@ -39,7 +39,10 @@ if ( isset($_GET['id']) )
            <?php var_dump($row['firstname']); ?>
             <h2 class="blog-post-title"><?=$row['title']?></h2>
             <p class="blog-post-meta"><?=date_format(date_create($row['date']), "Y/m/d H:i")?> par <a href="#"><?=$getAuthor['firstname'] . ' ' . $getAuthor['lastname']?></a></p>
-            <p><?=$row['content']?></p>
+            <p><?php
+            $parser->parse($row['content']);
+            print $parser->getAsHtml();
+            ?>
           </div><!-- /.blog-post -->
 
         </div><!-- /.blog-main -->

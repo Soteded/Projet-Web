@@ -78,7 +78,7 @@
 							$pageAct = 1;
 					}
 
-					$nombreDeNewsParPage = 1;
+					$nombreDeNewsParPage = 4;
 						
           $retour = $db->prepare('SELECT * FROM articles ORDER BY id DESC');
           $retour->execute();
@@ -110,16 +110,13 @@
 							}	
 							else //Sinon...
 							{
-										echo ' <a href="/home?pageArticle='.$i.'">'.$i.'</a> ';
+                    echo ' <a href="/home?pageArticle='.$i.'">'.$i.'</a> ';
 							}
 					}
 					?>
 
-
-
           <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Archives</a>
-            <a class="btn btn-outline-secondary disabled" href="#">Suivant</a>
+            
           </nav>
 
         </div><!-- /.blog-main -->
@@ -129,7 +126,7 @@
             <h4 class="font-italic">A propos</h4>
             <p class="mb-0">
                 <?php 
-                $req = $db->prepare('SELECT * FROM articles WHERE category_id = 999');
+                $req = $db->prepare('SELECT * FROM a_propos');
                 $req->execute();
                 $aPropos = $req->fetch();
                 echo $aPropos['content'];

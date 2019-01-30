@@ -18,9 +18,13 @@
 $username = $_SESSION['username'];
 
 
-$checkrank = mysqli_query($mysqli,"SELECT `rank` FROM `tbl_user` WHERE user_login = '".$username."'");
-while($row = mysqli_fetch_array($checkrank)) {
+$checkrank = $db->prepare("SELECT `rank` FROM `tbl_user` WHERE user_login = '".$username."'");
+$checkrank->execute();
+// var_dump($checkrank);
+
+while($row = $checkrank->fetch()) {
     if(strtolower($row['rank']) == 'admin') {
+        // var_dump($row['rank']); --> Return "Admin" (Donc good)
    
 
 //-----------------------------------------------------
@@ -95,8 +99,9 @@ if (isset($_GET['supprimer_news'])) // Si l'on demande de supprimer une news.
     </thead>
     <tbody>
     <?php
-$retour = $mysqli->query('SELECT * FROM articles ORDER BY id DESC');
-while ($donnees = $retour->fetch_array()) // On fait une boucle pour lister les news.
+$retour = $db->prepare('SELECT * FROM articles ORDER BY id DESC');
+$retour->execute();
+while ($donnees = $retour->fetch()) // On fait une boucle pour lister les news.
 {
 ?>
 <tr>

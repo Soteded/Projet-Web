@@ -7,9 +7,10 @@
 
 if ( isset($_GET['id']) )
 {
-    $res = $mysqli->query("SELECT * FROM articles WHERE id = ".$_GET['id']." ");
-    $row = mysqli_fetch_array($res);
-
+    $res = $db->prepare("SELECT * FROM articles WHERE id = ".$_GET['id']." ");
+    $res->execute();
+    $row = $res->fetch();
+    //var_dump($row);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -27,10 +28,9 @@ if ( isset($_GET['id']) )
  <a class="btn btn-disc" href="/listenews"><i class="fas fa-angle-double-left" style="color: #339af0;"></i> Retour aux news</a>
 <form action="/listenews" method="post">
 
-
     <fieldset>
         <legend>Titre : </legend>
-        <input type="text" size="100" name="title" value="<?= $row[title] ?>" /></p>
+        <input type="text" size="100" name="title" value="<?= $row['title'] ?>" /></p>
     </fieldset>
     <fieldset>
         <legend>Catégorie : </legend>
@@ -42,13 +42,13 @@ if ( isset($_GET['id']) )
     </fieldset>
     <fieldset>
         <legend>Sentence : </legend>
-        <textarea rows="5" cols="100" name="sentence"><?= rtrim($row[sentence]); ?></textarea>
+        <textarea rows="5" cols="100" name="sentence"><?= rtrim($row['sentence']); ?></textarea>
     </fieldset>
 
     <fieldset>
         <legend>Contenu : </legend>
-        <textarea rows="10" cols="100" name="content"><?= rtrim($row[content]); ?></textarea><br />
-        <input type="hidden" name="id_modif" value="<?= $row[id] ?>" />
+        <textarea rows="10" cols="100" name="content"><?= rtrim($row['content']); ?></textarea><br />
+        <input type="hidden" name="id_modif" value="<?= $row['id'] ?>" />
     </fieldset>
     <input type="submit" value="Envoyer" />
     

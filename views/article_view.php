@@ -4,6 +4,15 @@ if ( isset($_GET['id']) )
         $res = $db->prepare("SELECT * FROM articles WHERE id = ".$_GET['id']." ");
         $res->execute();
         $row = $res->fetch();
+
+        $author = $db->prepare("SELECT firstname, lastname FROM authors aut
+                                INNER JOIN articles art
+                                ON art.author_id = aut.id
+                                WHERE art.author_id = ".$row['author_id']." ");
+        // var_dump($author);
+        $author->execute();
+        $getAuthor = $author->fetch();
+        // var_dump($getAuthor);
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,8 +36,9 @@ if ( isset($_GET['id']) )
       <div class="row">
         <div class="col-md-8 blog-main">
          <div class="blog-post">
+           <?php var_dump($row['firstname']); ?>
             <h2 class="blog-post-title"><?=$row['title']?></h2>
-            <p class="blog-post-meta"><?=date_format(date_create($row['date']), "Y/m/d H:i")?> par <a href="#"><?=$row['firstname'] . ' ' . $row['lastname']?></a></p>
+            <p class="blog-post-meta"><?=date_format(date_create($row['date']), "Y/m/d H:i")?> par <a href="#"><?=$getAuthor['firstname'] . ' ' . $getAuthor['lastname']?></a></p>
             <p><?=$row['content']?></p>
           </div><!-- /.blog-post -->
 

@@ -82,20 +82,39 @@
 						
           $retour = $db->prepare('SELECT * FROM articles ORDER BY id DESC');
           $retour->execute();
-					$donnees = $retour->fetchAll();
+          $donnees = $retour->fetchAll();
+          
           $i = 0;
           //var_dump($pageAct);
           //var_dump($page);
           //var_dump($_GET['page']);
 					$nbpage = ceil(count($donnees)/$nombreDeNewsParPage);
-					while($i < $nombreDeNewsParPage && $i+$nombreDeNewsParPage*($pageAct-1) < count($donnees)){
-						$numdonnee = ($pageAct-1==0)? $i : $i+$nombreDeNewsParPage*($pageAct-1);
-					?>
-         
+          while($i < $nombreDeNewsParPage && $i+$nombreDeNewsParPage*($pageAct-1) 
+          < count($donnees)){
+					$numdonnee = ($pageAct-1==0)? $i : $i+$nombreDeNewsParPage*($pageAct-1);
+					 
+          $author = $db->prepare("SELECT firstname, lastname FROM authors aut
+                                  INNER JOIN articles art
+                                  ON art.author_id = aut.id
+                                  WHERE art.author_id = ".$donnees[$numdonnee]['author_id']." ");
+          // var_dump($author);
+          $author->execute();
+          $getAuthor = $author->fetch();
+
+          $substrArt = substr($donnees[$numdonnee]['content'], 0, 100);
+          // var_dump($getAuthor);
+          ?>
           <div class="blog-post">
-            <h2 class="blog-post-title"><a href="/article?id<?=$donnees[$numdonnee]['id']?>" style="color:black;font-size:36px;"><?=$donnees[$numdonnee]['title']?></a></h2>
-            <p class="blog-post-meta"><?=date_format(date_create($donnees[$numdonnee]['date']), "Y/m/d H:i")?> par <a href="#"><?=$donnees[$numdonnee]['firstname'] . ' ' . $donnees[$numdonnee]['lastname']?></a></p>
-            <p><?=$donnees[$numdonnee]['content']?></p>
+            <h2 class="blog-post-title"><a href="/article?id=<?=$donnees[$numdonnee]['id']?>" style="color:black;font-size:36px;"><?=$donnees[$numdonnee]['title']?></a></h2>
+            <p class="blog-post-meta"><?=date_format(date_create($donnees[$numdonnee]['date']), "Y/m/d H:i")?> par <a href="#"><?=$getAuthor['firstname'] . ' ' . $getAuthor['lastname']?></a></p>
+            <p><?php
+            // var_dump(strlen($donnees[$numdonnee]['content']));
+            if (strlen($donnees[$numdonnee]['content']) < 100) {
+              echo $substrArt;
+            }else {
+              echo $substrArt, '.....';
+            }
+            ?></p>
           </div><!-- /.blog-post -->
           
           <?php
@@ -111,8 +130,10 @@
 							else //Sinon...
 							{
                     echo ' <a href="/home?pageArticle='.$i.'">'.$i.'</a> ';
-							}
-					}
+              }
+              
+          }
+          echo '</p>';
 					?>
 
           <nav class="blog-pagination">

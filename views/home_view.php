@@ -71,13 +71,49 @@
       <div class="row">
         <div class="col-md-8 blog-main">
           <h3 class="pb-3 mb-4 font-italic border-bottom">Nouvelles news</h3>
-        <?php foreach ($allArticles as $index => $article): ?>
+
+          <?php
+          $pageAct = $_GET['pageArticle'];
+					if(!$pageAct || $pageAct == 0 || !is_numeric($pageAct)){
+							$pageAct = 1;
+					}
+
+					$nombreDeNewsParPage = 1;
+						
+          $retour = $db->prepare('SELECT * FROM articles ORDER BY id DESC');
+          $retour->execute();
+					$donnees = $retour->fetchAll();
+          $i = 0;
+          //var_dump($pageAct);
+          //var_dump($page);
+          //var_dump($_GET['page']);
+					$nbpage = ceil(count($donnees)/$nombreDeNewsParPage);
+					while($i < $nombreDeNewsParPage && $i+$nombreDeNewsParPage*($pageAct-1) < count($donnees)){
+						$numdonnee = ($pageAct-1==0)? $i : $i+$nombreDeNewsParPage*($pageAct-1);
+					?>
+         
           <div class="blog-post">
-            <h2 class="blog-post-title"><a href="/article?id<?=$article['id']?>" style="color:black;font-size:36px;"><?=$article['title']?></a></h2>
-            <p class="blog-post-meta"><?=date_format(date_create($article['date']), "Y/m/d H:i")?> par <a href="#"><?=$article['firstname'] . ' ' . $article['lastname']?></a></p>
-            <p><?=$article['content']?></p>
+            <h2 class="blog-post-title"><a href="/article?id<?=$donnees[$numdonnee]['id']?>" style="color:black;font-size:36px;"><?=$donnees[$numdonnee]['title']?></a></h2>
+            <p class="blog-post-meta"><?=date_format(date_create($donnees[$numdonnee]['date']), "Y/m/d H:i")?> par <a href="#"><?=$donnees[$numdonnee]['firstname'] . ' ' . $donnees[$numdonnee]['lastname']?></a></p>
+            <p><?=$donnees[$numdonnee]['content']?></p>
           </div><!-- /.blog-post -->
-        <?php endforeach?>
+          
+          <?php
+          $i++;
+					}
+						echo '<p align="center">Page : '; //Pour l'affichage, on centre la liste des pages
+					for($i=1; $i<=$nbpage; $i++) //On fait notre boucle
+					{
+							if($i==$pageAct) //Si il s'agit de la page actuelle...
+							{
+									echo ' [ '.$i.' ] '; 
+							}	
+							else //Sinon...
+							{
+										echo ' <a href="/home?pageArticle='.$i.'">'.$i.'</a> ';
+							}
+					}
+					?>
 
 
 
@@ -112,11 +148,3 @@
   <?php include_once 'views/includes/footer.php'?>
   </body>
 </html>
-
-
-
-
-
-
-
-<!-- <script src="assets/js/app.js"></script> -->

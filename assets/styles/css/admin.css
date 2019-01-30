@@ -3,15 +3,87 @@
 	padding: 0px;
 }
 body {
-  background: rgba(30,29,31,1);
-  background: -moz-linear-gradient(-45deg, rgba(30,29,31,1) 0%, rgba(223,64,90,1) 100%);
-  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(30,29,31,1)), color-stop(100%, rgba(223,64,90,1)));
-  background: -webkit-linear-gradient(-45deg, rgba(30,29,31,1) 0%, rgba(223,64,90,1) 100%);
-  background: -o-linear-gradient(-45deg, rgba(30,29,31,1) 0%, rgba(223,64,90,1) 100%);
-  background: -ms-linear-gradient(-45deg, rgba(30,29,31,1) 0%, rgba(223,64,90,1) 100%);
-  background: linear-gradient(135deg, rgba(30,29,31,1) 0%, rgba(223,64,90,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e1d1f', endColorstr='#df405a', GradientType=1 );
+	height: 100%;
+  margin: 0;
+  background: #C04848;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #480048, #C04848);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #480048, #C04848); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+.header {
+	width: 50%;
+	margin: 50px auto 0px;
+	color: white;
+	background: #333;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	border-radius: 10px 10px 0px 0px;
+	padding: 20px;
 }
+form, .content {
+	width: 100%;
+	margin: 0px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	background: white;
+	border-radius: 0px 0px 10px 10px;
+}
+.content_admin {
+  width: 50%;
+	margin: 0px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	background: white;
+	border-radius: 0px 0px 10px 10px;
+}
+.small {
+  width: 50%;
+}
+.input-group {
+	margin: 10px 0px 10px 0px;
+}
+
+.input-group label {
+	display: block;
+	text-align: left;
+	margin: 3px;
+}
+.input-group input {
+	height: 30px;
+	width: 93%;
+	padding: 5px 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 1px solid gray;
+}
+.btn {
+	padding: 10px;
+	font-size: 15px;
+	color: white;
+	background: #87314e;
+	border: none;
+	border-radius: 5px;
+}
+.btn:hover {
+	background:#df405a;
+}
+.error {
+	width: 92%; 
+	margin: 0px auto; 
+	padding: 10px; 
+	border: 1px solid #a94442; 
+	color: #a94442; 
+	background: #f2dede; 
+	border-radius: 5px; 
+	text-align: left;
+}
+.success {
+	color: #3c763d; 
+	background: #dff0d8; 
+	border: 1px solid #3c763d;
+	margin-bottom: 20px;
+}
+
   #container {
     width:50%;
     margin: 0px auto;
@@ -65,7 +137,7 @@ body {
     color:white;
   }
 
-  input[type=text], select, textarea {
+  input[type=text],input[type=password], select, textarea {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

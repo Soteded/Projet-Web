@@ -9,7 +9,7 @@ include('verif.php');
 session_destroy();
 
 // Redirection vers l'index du site
-echo "<script type='text/javascript'>document.location.replace('/admin/index.php');</script>";
+echo "<script type='text/javascript'>document.location.replace('/admin');</script>";
 exit();
 ?>
 

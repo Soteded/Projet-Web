@@ -30,9 +30,9 @@
 			if (mysqli_num_rows($results) == 1) {
 				$_SESSION['username'] = $username;
 				$_SESSION['success'] = "Vous êtes connecté";
-				header('location: index.php');
+				header('location: ../admin');
 			}else {
-				array_push($errors, "Wrong username/password combination");
+				array_push($errors, "Mauvais mot de passe ou non d'utilisateur !");
 			}
 		}
 	}

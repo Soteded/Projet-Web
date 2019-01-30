@@ -3,28 +3,28 @@
 
 	if (!isset($_SESSION['username'])) {
 		$_SESSION['msg'] = "Vous devez être connecté pour accéder à cette page";
-		header('location: login.php');
+		header('location: /login');
 	}
 
 	if (isset($_GET['logout'])) {
 		session_destroy();
 		unset($_SESSION['username']);
-		header("location: login.php");
+		header("location: /login");
 	}
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<?php require '../views/includes/head.php'?>
+	<?php require 'views/includes/head.php'?>
 	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="assets/styles/css/admin.css">
 </head>
 <body>
 	<div class="header">
 		<h2>Administration</h2>
 	</div>
-	<div class="content">
+	<div class="content_admin">
 
 		<!-- notification message -->
 		<?php if (isset($_SESSION['success'])) : ?>
@@ -48,7 +48,7 @@
     			if(strtolower($row['rank']) == 'admin') { ?>
 					<p> <a href="/listenews" style="color: red;">Liste des news</a> </p>
 				<?php } ?>
-			<p> <a href="/disconnect.php" style="color: red;">Se deconnecter</a> </p>
+			<p> <a href="/disconnect" style="color: red;">Se deconnecter</a> </p>
 		<?php } } ?>
 	</div>
 		
